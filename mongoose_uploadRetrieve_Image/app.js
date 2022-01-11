@@ -52,6 +52,22 @@ app.get('/', (req, res) => {
         else {
             res.render('imagesPage', { items: items });
         }
+});});
+
+//this get is only for sending json data to frontend, but if you view it in browser, you will see very interesting content.
+app.get('/listimages', (req, res) => {
+    imgModel.find({}, (err, items) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('An error occurred', err);
+        }
+        else {
+//	    var data64=Buffer.from(items[0].img.data,"binary").toString('base64');
+//	    console.log(data64);
+//	    console.log("after base64-->");
+	    //	    console.log(items[0].img.data.data.toString('base64'));
+            res.json(items);
+        }
     });
 });
 /////Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
